@@ -1,4 +1,49 @@
-let inputSum = 1;
+let inputSum = 0;
+
+function getData() {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			showData(JSON.parse(this.responseText));
+		}
+	};
+	let url = window.location + "get.php";
+	xhttp.open("GET", url, true);
+	xhttp.send();
+}
+
+function showData(data) {
+	const from = document.getElementById("form");
+	for (let i = 0; i < data.length; i++) {
+		inputSum = inputSum + 1;
+		const input = `
+        <div class="input-container">
+            <div class="input-group">
+                <label for="url">Url</label>
+                <input type="text" name="url" id="url-${inputSum}" placeholder="type url here" class="input" value="${data[i].url}">
+            </div>
+            <div class="input-group">
+                <label for="kode">Kode</label>
+                <textarea name="kode" id="kode-${inputSum}" cols="30" rows="10" class="input">${data[i].kode}</textarea>
+            </div>
+        </div>`;
+		form.insertAdjacentHTML("beforeend", input);
+	}
+	inputSum = inputSum + 1;
+	const input = `
+	<div class="input-container">
+		<div class="input-group">
+			<label for="url">Url</label>
+			<input type="text" name="url" id="url-${inputSum}" placeholder="type url here" class="input">
+		</div>
+		<div class="input-group">
+			<label for="kode">Kode</label>
+			<textarea name="kode" id="kode-${inputSum}" cols="30" rows="10" class="input"></textarea>
+		</div>
+	</div>`;
+	form.insertAdjacentHTML("beforeend", input);
+}
+
 function addInput() {
 	inputSum = inputSum + 1;
 	const from = document.getElementById("form");
@@ -42,3 +87,5 @@ function simpan() {
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("data=" + JSON.stringify(data));
 }
+
+this.getData();
