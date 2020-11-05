@@ -14,6 +14,7 @@ function getData() {
 
 function showData(data) {
 	const from = document.getElementById("form");
+	from.innerHTML = "";
 	for (let i = 0; i < data.length; i++) {
 		inputSum = inputSum + 1;
 		const input = `
@@ -78,8 +79,7 @@ function simpan() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function () {
 		if (this.readyState == 4 && this.status == 200) {
-			console.log(this.responseText);
-			alert("check console untuk melihat data json");
+			getData();
 		}
 	};
 	let url = window.location + "simpan.php";
@@ -87,5 +87,8 @@ function simpan() {
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("data=" + JSON.stringify(data));
 }
-
 this.getData();
+
+setInterval(() => {
+	this.getData();
+}, 10000);
