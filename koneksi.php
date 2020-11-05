@@ -1,5 +1,5 @@
 <?php
 $USERNAME = 'root';
-$PASSWORD = 'denijulisetiawan112';
+$PASSWORD = '';
 $DATABASE = 'formbiasa';
 $koneksi = mysqli_connect('localhost', $USERNAME, $PASSWORD, $DATABASE);
